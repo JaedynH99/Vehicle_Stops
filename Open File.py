@@ -7,6 +7,8 @@ class TrafficStop:
     def __init__(self,race, gender):
         self.race = race
         self.gender = gender
+    def __str__(self):
+        return f'TrafficStop of {self.race}, {self.gender}'
 
 def load_file (file_name):
     global races
@@ -49,7 +51,41 @@ def race_count():
     black = [stop for stop in stops if stop.race == 'B']
     chinese = [stop for stop in stops if stop.race == 'C']
     cambodian = [stop for stop in stops if stop.race == 'D']
-    
+    filipino = [stop for stop in stops if stop.race == 'F']
+    guamanian = [stop for stop in stops if stop.race == 'G']
+    hispanic = [stop for stop in stops if stop.race == 'H']
+    american_indian = [stop for stop in stops if stop.race == 'I']
+    japanese = [stop for stop in stops if stop.race == 'J']
+    korean = [stop for stop in stops if stop.race == 'K']
+    laotian = [stop for stop in stops if stop.race == 'L']
+    other = [stop for stop in stops if stop.race == 'O']
+    pacific_islander = [stop for stop in stops if stop.race == 'P']
+    samoan = [stop for stop in stops if stop.race == 'S']
+    hawaiian = [stop for stop in stops if stop.race == 'U']
+    vietnamese = [stop for stop in stops if stop.race == 'V']
+    white = [stop for stop in stops if stop.race == 'W']
+    asian_indian = [stop for stop in stops if stop.race == 'Z']
+    print('the amount of unspecified asians =', len(unspecified_asian))
+    print('the amount of blacks =', len(black))
+    print('the amount of chinese =', len(chinese))
+    print('the amount of cambodians =', len(cambodian))
+    print('the amount of filipinos =', len(filipino))
+    print('the amount of guamanians =', len(guamanian))
+    print('the amount of hispanics =', len(hispanic))
+    print('the amount of american indians =', len(american_indian))
+    print('the amount of japanese =', len(japanese))
+    print('the amount of koreans =', len(korean))
+    print('the amount of laotians =', len(laotian))
+    print('the amount of others =', len(other))
+    print('the amount of pacific islanders =', len(pacific_islander))
+    print('the amount of samoans =', len(samoan))
+    print('the amount of hawaiians =', len(hawaiian))
+    print('the amount of vietnamese =', len(vietnamese))
+    print('the amount of whites =', len(white))
+    print('the amount of asian indians =', len(asian_indian))
+
+
 load_file('vehicle_stops_2017_datasd.csv')
 gender_count()
+race_count()
 
