@@ -105,18 +105,29 @@ def load_file_census(file_name):
 
 if __name__=='__main__':
     load_file_census('DemographicCensus.csv')
-    # load_file('vehicle_stops_2017_datasd.csv')
-    num_bins = 7
-    fig, axes = plt.subplots()
-    colors = ['blue','green','yellow']
+    n_groups = 7
+    means_frank = (people[48], people[47], people [49], people[50], people[51], people[52], people[44])
+    means_guido = (85, 62, 54, 20)
 
-    n, bins, pathches = axes.hist(people, num_bins, alpha = 0.5, color = colors, label = colors)
+    fig, ax = plt.subplots()
+    index = np.arange(n_groups)
+    bar_width = 0.35
+    opacity = 0.8
 
-    axes.legend(prop={'size': 10})
-    axes.set_title('bars with legend')
+    rects1 = plt.bar(index, means_frank, bar_width,alpha=opacity,color='b',label='Race in County')
+
+    rects2 = plt.bar(index + bar_width, means_guido, bar_width,alpha=opacity,color='g',label='Race in Vehicle Stops')
+
+    plt.xlabel('Person')
+    plt.ylabel('Scores')
+    plt.title('Scores by person')
+    plt.xticks(index + bar_width, ('A', 'B', 'C', 'D'))
+    plt.legend()
+
+    plt.tight_layout()
     plt.show()
 
 race_count()
-gender_count()
+# gender_count()
 
 
