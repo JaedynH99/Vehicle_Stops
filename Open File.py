@@ -3,9 +3,14 @@ import numpy as np
 import matplotlib.mlab as mlab
 import matplotlib.pyplot as plt
 people = []
-# races= []
-# genders=[]
 stops=[]
+blacks = None
+asians = None
+hispanics = None
+american_indians = None
+others = None
+pacific_islanders = None
+whites = None
 
 class TrafficStop:
     def __init__(self,race, gender):
@@ -17,33 +22,14 @@ class TrafficStop:
 def load_file (file_name):
     global races
     global genders
-    with open('vehicle_stops_2017_datasd.csv') as a:
-        for line in a:
+    with open('vehicle_stops_2017_datasd.csv') as t:
+        for line in t:
             line=line.replace('"','  ')
             data = line.split(',')
             if data[3] and data[4]:
                 stops.append(TrafficStop (data[3].strip(), data[4].strip()))
-                # print(stops[-1].gender)
-    #             races.append(data[3])
-    #             genders.append(data[4])
-    # print(genders)
-    # print(races)
 
-    a.close()
-# def count_gender():
-#     count_M = genders.count(' M ')
-#     count_F = genders.count(' F ')
-#     print('the amount of females =', count_F)
-#     print('the amount of males =', count_M)
-#
-# def count_race():
-#     race_W = races.count('W')
-#     race_B = races.count('B')
-#     race_A = races.count('')
-#     race_O=
-#     race_H=
-#     race_I=
-
+    t.close()
 
 def gender_count():
     males = [stop for stop in stops if stop.gender=="M"]
@@ -52,6 +38,14 @@ def gender_count():
     print('the amount of females=',len(females)/len(stops))
 
 def race_count():
+    global stops
+    global blacks
+    global asians
+    global hispanics
+    global american_indians
+    global others
+    global pacific_islanders
+    global whites
     asian = [stop for stop in stops if stop.race =='A' or stop.race=='F' or stop.race=='D' or stop.race=='C' or stop.race=='J' or stop.race=='K' or stop.race=='L' or stop.race=='V' or stop.race=='Z']
     black = [stop for stop in stops if stop.race == 'B']
     # chinese = [stop for stop in stops if stop.race == 'C']
@@ -70,24 +64,13 @@ def race_count():
     # vietnamese = [stop for stop in stops if stop.race == 'V']
     white = [stop for stop in stops if stop.race == 'W']
     # asian_indian = [stop for stop in stops if stop.race == 'Z']
-    # print('the amount of unspecified asians =', len(asian)/len(stops))
-    # # print('the amount of blacks =', len(black)/len(stops))
-    # print('the amount of chinese =', len(chinese)/len(stops))
-    # # print('the amount of cambodians =', len(cambodian)/len(stops))
-    # # print('the amount of filipinos =', len(filipino)/len(stops))
-    # # print('the amount of guamanians =', len(guamanian)/len(stops))
-    # # print('the amount of hispanics =', len(hispanic)/len(stops))
-    # # print('the amount of american indians =', len(american_indian)/len(stops))
-    # # print('the amount of japanese =', len(japanese)/len(stops))
-    # # print('the amount of koreans =', len(korean)/len(stops))
-    # # print('the amount of laotians =', len(laotian)/len(stops))
-    # # print('the amount of others =', len(other)/len(stops))
-    # print('the amount of pacific islanders =', len(pacific_islander)/len(stops))
-    # print('the amount of samoans =', len(samoan)/len(stops))
-    # print('the amount of hawaiians =', len(hawaiian)/len(stops))
-    # print('the amount of vietnamese =', len(vietnamese)/len(stops))
-    # print('the amount of whites =',len(white)/len(stops))
-    # print('the amount of asian indians =',len(asian_indian)/len(stops))
+    blacks = ((len(black)/len(stops))*100)
+    asians = ((len(asian)/len(stops))*100)
+    hispanics = ((len(hispanic)/len(stops))*100)
+    american_indians = ((len(american_indian)/len(stops))*100)
+    others = ((len(other)/len(stops))*100)
+    pacific_islanders = ((len(pacific_islander)/len(stops))*100)
+    whites = ((len(white)/len(stops))*100)
 
 class CensusData:
     def __init__(self, total_race, total_gender):
@@ -96,38 +79,39 @@ class CensusData:
 
 def load_file_census(file_name):
     global people
-    with open('DemographicCensus.csv') as f:
-        readCSV = csv.reader(f, delimiter=',')
+    with open('DemographicCensus.csv') as z:
+        readCSV = csv.reader(z, delimiter=',')
         for row in readCSV:
             people.append(row[3])
-        print(people)
-    f.close()
+        z.close()
 
 if __name__=='__main__':
     load_file_census('DemographicCensus.csv')
+    a = float(people[48])
+    b = float(people[46])
+    c = float(people[49])
+    d = float(people[50])
+    e = float(people[51])
+    f = float(people[52])
+    g = float(people[44])
+    load_file('vehicle_stops_2017_datasd.csv')
+    race_count()
     n_groups = 7
-    means_frank = (people[48], people[47], people [49], people[50], people[51], people[52], people[44])
-    means_guido = (85, 62, 54, 20)
-
+    means_frank = (a, b, c, d, e, f, g)
+    means_guido = (whites, hispanics, blacks, american_indians, asians, pacific_islanders, others)
     fig, ax = plt.subplots()
     index = np.arange(n_groups)
     bar_width = 0.35
     opacity = 0.8
+    rects1 = plt.bar(index, means_frank, bar_width,alpha=opacity,color='b',label='Amount of People Residing in San Diego County')
+    rects2 = plt.bar(index + bar_width, means_guido, bar_width,alpha=opacity,color='g',label='Amount of People Police Pulled Over')
 
-    rects1 = plt.bar(index, means_frank, bar_width,alpha=opacity,color='b',label='Race in County')
-
-    rects2 = plt.bar(index + bar_width, means_guido, bar_width,alpha=opacity,color='g',label='Race in Vehicle Stops')
-
-    plt.xlabel('Person')
-    plt.ylabel('Scores')
-    plt.title('Scores by person')
-    plt.xticks(index + bar_width, ('A', 'B', 'C', 'D'))
+    plt.xlabel('Race')
+    plt.ylabel('Percentage of the Total')
+    plt.title('Do police have a racial bias?')
+    plt.xticks(index + bar_width, ('White','Hispanic', 'Black', 'American Indian', 'Asian', 'Pacific Islander', 'Other'))
     plt.legend()
 
     plt.tight_layout()
     plt.show()
-
-race_count()
-# gender_count()
-
 
