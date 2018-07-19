@@ -38,32 +38,15 @@ def gender_count():
     print('the amount of females=',len(females)/len(stops))
 
 def race_count():
-    global stops
-    global blacks
-    global asians
-    global hispanics
-    global american_indians
-    global others
-    global pacific_islanders
-    global whites
-    asian = [stop for stop in stops if stop.race =='A' or stop.race=='F' or stop.race=='D' or stop.race=='C' or stop.race=='J' or stop.race=='K' or stop.race=='L' or stop.race=='V' or stop.race=='Z']
+    global stops, blacks, asians, hispanics, american_indians, others, pacific_islanders, whites
+    asian = [stop for stop in stops if stop.race =='A' or stop.race=='F' or stop.race=='D' or stop.race=='C' or\
+             stop.race=='J' or stop.race=='K' or stop.race=='L' or stop.race=='V' or stop.race=='Z']
     black = [stop for stop in stops if stop.race == 'B']
-    # chinese = [stop for stop in stops if stop.race == 'C']
-    # cambodian = [stop for stop in stops if stop.race == 'D']
-    # filipino = [stop for stop in stops if stop.race == 'F']
-    # guamanian = [stop for stop in stops if stop.race == 'G']
     hispanic = [stop for stop in stops if stop.race == 'H']
     american_indian = [stop for stop in stops if stop.race == 'I']
-    # japanese = [stop for stop in stops if stop.race == 'J']
-    # korean = [stop for stop in stops if stop.race == 'K']
-    # laotian = [stop for stop in stops if stop.race == 'L']
     other = [stop for stop in stops if stop.race == 'O']
     pacific_islander = [stop for stop in stops if stop.race == 'P' or stop.race=='G' or stop.race=='S' or stop.race=='U']
-    # samoan = [stop for stop in stops if stop.race == 'S']
-    # hawaiian = [stop for stop in stops if stop.race == 'U']
-    # vietnamese = [stop for stop in stops if stop.race == 'V']
     white = [stop for stop in stops if stop.race == 'W']
-    # asian_indian = [stop for stop in stops if stop.race == 'Z']
     blacks = ((len(black)/len(stops))*100)
     asians = ((len(asian)/len(stops))*100)
     hispanics = ((len(hispanic)/len(stops))*100)
